@@ -1,8 +1,9 @@
-from flask import Flask, request, render_template, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from data_models import db, Author, Book
 import os
 from datetime import datetime
+
+from flask import Flask, request, render_template, redirect, url_for
+
+from data_models import db, Author, Book
 
 app = Flask(__name__)
 
@@ -33,6 +34,7 @@ def add_author():
         message = 'Thanks :) - Your author has successfully been added to the DB!'
     return render_template('add_author.html', message=message)
 
+
 @app.route('/add_book', methods=['GET', 'POST'])
 def add_book():
     message = None
@@ -42,7 +44,7 @@ def add_book():
         publication_year = int(request.form.get('publication_year'))
         author_id = int(request.form.get('author_id'))
 
-        new_book = Book(title=title, isbn=isbn,publication_year=publication_year, author_id=author_id)
+        new_book = Book(title=title, isbn=isbn, publication_year=publication_year, author_id=author_id)
         db.session.add(new_book)
         db.session.commit()
         message = 'Thanks :) - Your book has been added successfully to the DB'
@@ -55,7 +57,7 @@ def add_book():
 def home():
     search = request.args.get('search')
     sort = request.args.get('sort')
-    message= request.args.get('message')
+    message = request.args.get('message')
 
     if search:
         books = Book.query.filter(Book.title.like(f'%{search}%')).all()
@@ -68,6 +70,7 @@ def home():
     else:
         books = Book.query.all()
     return render_template('home.html', books=books, search=search, message=message)
+
 
 @app.route('/book/<int:book_id>/delete', methods=['POST'])
 def delete_book(book_id):

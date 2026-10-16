@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
   </head>
   <body>
   <a href="/add_author">Add Author</a> | <a href="/add_book">Add Book</a><br><br>
@@ -12,8 +13,12 @@
   <a href="/?sort=id">Sort By ID</a>
   <br><br>
   <form action="/" method="GET">
-    <input type="text" name="search" placeholder="Search by title">
-    <button type="submit">Search</button></form><br>
+    <label>
+      <input name="search" placeholder="Search by title" type="text">
+    </label>
+    <button type="submit">Search</button>
+  </form>
+  <br>
 {% if search and not books %}
   <p>Sorry no books with your search parameter "{{ search }}" found.</p>
 {% endif %}
