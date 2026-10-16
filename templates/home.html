@@ -11,15 +11,17 @@
   <a href="/?sort=id">Sort By ID</a>
   <br><br>
   <form action="/" method="GET">
-    <input type="text" name="title" placeholder="Search by title">
+    <input type="text" name="search" placeholder="Search by title">
     <button type="submit">Search</button></form><br>
-    {% for book in books %}
-    <div>
-      ----
-      <h2>ID {{book.id}} : "{{ book.title }}" by: {{ book.author.name }}</h2>
+{% if not books %}
+  <p>Sorry no books with your search parameter "{{ search }}" found.</p>
+{% endif %}
+{% for book in books %}
+<div>
+  ----
+  <h2>ID {{book.id}} : "{{ book.title }}" by: {{ book.author.name }}</h2>
+</div>
+{% endfor %}
 
-    </div>
-    {% endfor %}
-
-  </body>
+</body>
 </html>
