@@ -7,6 +7,7 @@ from data_models import db, Author, Book
 
 app = Flask(__name__)
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'data/library.sqlite')
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_path}"
 
@@ -37,7 +38,7 @@ def add_author():
         db.session.add(new_author)
         db.session.commit()
         message = (
-            'Thanks :) - Your author has successfully'
+            'Thanks :) - Your author has successfully '
             'been added to the DB!'
         )
     return render_template(
@@ -64,7 +65,10 @@ def add_book():
         )
         db.session.add(new_book)
         db.session.commit()
-        message = 'Thanks :) - Your book has been added successfully to the DB!'
+        message = (
+            'Thanks :) - Your book has been added '
+            'successfully to the DB!'
+        )
 
     authors = Author.query.all()
     return render_template(
@@ -107,6 +111,6 @@ def delete_book(book_id):
     db.session.commit()
     return redirect(url_for(
         'home',
-        message='Your book with the ID'
+        message='Your book with the ID '
                 f'{book_id} has been deleted.')
     )
