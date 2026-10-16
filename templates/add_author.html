@@ -17,6 +17,8 @@
   <input type="date" id="date_of_death" name="date_of_death"><br><br>
   <input type="submit" value="Add Author"> 
   </form>
-
+  {% if message %}
+    <p>{{ message }}</p>
+  {% endif %}
   </body>
 </html>

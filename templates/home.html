@@ -6,9 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
   </head>
   <body>
-
+  <a href="/?sort=title">Sort By Title</a><br>
+  <a href="/?sort=author">Sort By Author</a><br>
+  <a href="/?sort=id">Sort By ID</a>
+  <br><br>
+  <form action="/" method="GET">
+    <input type="text" name="title" placeholder="Search by title">
+    <button type="submit">Search</button></form><br>
     {% for book in books %}
-    <div> <h3>{{ book.title }}</h3>
+    <div>
+      ----
+      <h2>ID {{book.id}} : "{{ book.title }}" by: {{ book.author.name }}</h2>
+
     </div>
     {% endfor %}
 
