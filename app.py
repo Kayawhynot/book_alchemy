@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from data_models import db, Author, Book
 import os
@@ -55,6 +55,8 @@ def add_book():
 def home():
     search = request.args.get('search')
     sort = request.args.get('sort')
+    message= request.args.get('message')
+
     if search:
         books = Book.query.filter(Book.title.like(f'%{search}%')).all()
     elif sort == 'title':
@@ -65,4 +67,11 @@ def home():
         books = Book.query.order_by(Book.id).all()
     else:
         books = Book.query.all()
-    return render_template('home.html', books=books, search=search)
+    return render_template('home.html', books=books, search=search, message=message)
+
+@app.route('/book/<int:book_id>/delete', methods=['POST'])
+def delete_book(book_id):
+    book = Book.query.get_or_404(book_id)
+    db.session.delete(book)
+    db.session.commit()
+    return redirect(url_for('home', message=f'Your book with the ID {book_id} has been deleted'))

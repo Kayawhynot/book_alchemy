@@ -16,10 +16,17 @@
 {% if not books %}
   <p>Sorry no books with your search parameter "{{ search }}" found.</p>
 {% endif %}
+  {% if message %}
+  <p>{{ message }}</p>
+  {% endif %}
 {% for book in books %}
 <div>
   ----
   <h2>ID {{book.id}} : "{{ book.title }}" by: {{ book.author.name }}</h2>
+   <form action="/book/{{book.id}}/delete" method="POST">
+    <button type="submit">Delete Book</button>
+  </form>
+
 </div>
 {% endfor %}
 
