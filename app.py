@@ -16,7 +16,9 @@ db.init_app(app)
 # with app.app_context(): db.create_all()
 
 @app.route('/add_author', methods=['GET', 'POST'])
+
 def add_author():
+
     message = None
     if request.method == 'POST':
         author_name = request.form.get('name')
@@ -37,6 +39,7 @@ def add_author():
 
 @app.route('/add_book', methods=['GET', 'POST'])
 def add_book():
+    """Show the form for a new book (GET) and save it to the DB (POST)."""
     message = None
     if request.method == 'POST':
         title = request.form.get('title')
@@ -55,6 +58,7 @@ def add_book():
 
 @app.route('/')
 def home():
+    """Lets the user search for keywords in Title, sort by ID, TITLE, NAME """
     search = request.args.get('search')
     sort = request.args.get('sort')
     message = request.args.get('message')
@@ -74,6 +78,7 @@ def home():
 
 @app.route('/book/<int:book_id>/delete', methods=['POST'])
 def delete_book(book_id):
+    """Adds Delete Endpoint to each DB entry"""
     book = Book.query.get_or_404(book_id)
     db.session.delete(book)
     db.session.commit()
