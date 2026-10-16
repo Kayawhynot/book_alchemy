@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_path}"
 
 db.init_app(app)
 
+
 # with app.app_context(): db.create_all()
 
 @app.route('/add_author', methods=['GET', 'POST'])
@@ -107,5 +108,5 @@ def delete_book(book_id):
     return redirect(url_for(
         'home',
         message='Your book with the ID'
-        f'{book_id} has been deleted.')
+                f'{book_id} has been deleted.')
     )
