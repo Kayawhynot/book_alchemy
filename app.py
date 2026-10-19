@@ -114,3 +114,7 @@ def delete_book(book_id):
         message='Your book with the ID '
                 f'{book_id} has been deleted.')
     )
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5002)
